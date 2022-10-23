@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_todo_app/controllers/too_controller.dart';
 
 import '../models/to_do_model.dart';
@@ -8,13 +7,20 @@ import '../models/to_do_model.dart';
 class TodoView extends StatelessWidget{
 
 final TodoController todoController = Get.find();
+final int index ;
+
+TodoView({Key key, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
+    String text ='' ;
+    if (this.index != null) {
+      text = todoController.todos[index].text;
+    }
+    TextEditingController textEditingController = TextEditingController( text: text);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add your Todo")
+        title: const Text("Add your Todo")
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
@@ -45,7 +51,7 @@ final TodoController todoController = Get.find();
                       todoController.todos.add(Todo(text: textEditingController.text,));
                       Get.back();
                       },
-                    child: const Text("Add Todo")
+                    child:  Text((this.index==null) ? "Add" : "Edit")
                 )
               ],
             ),

@@ -4,7 +4,7 @@ import 'package:getx_todo_app/controllers/too_controller.dart';
 import 'package:getx_todo_app/views/todo_view.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+
 
 
   @override
@@ -28,15 +28,18 @@ class HomeView extends StatelessWidget {
                 style: (todoController.todos[index].done ?
                 const TextStyle(color: Colors.greenAccent, decoration: TextDecoration.lineThrough) :
                 const TextStyle(color: Colors.redAccent)),),
-                onTap: (){},
-                trailing: Checkbox(
+                onTap: (){
+                  Get.to(TodoView(index: index));
+                },
+                leading: Checkbox(
                   value: todoController.todos[index].done,
                   onChanged: (v) {
                      var changed = todoController.todos[index];
-                     changed.done = v!;
+                     changed.done = v;
                      todoController.todos[index] = changed;
                   },
                 ),
+                trailing: const Icon(Icons.edit,),
               ),
               separatorBuilder: (_,__)=>const Divider(),
               itemCount: todoController.todos.length)
