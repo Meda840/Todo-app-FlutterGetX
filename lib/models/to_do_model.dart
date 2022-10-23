@@ -1,5 +1,5 @@
 class Todo {
-  final String text ;
+   String text ;
   bool done ;
 
   Todo({this.text='', this.done = false});

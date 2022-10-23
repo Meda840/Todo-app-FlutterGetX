@@ -48,7 +48,14 @@ TodoView({Key key, this.index}) : super(key: key);
                 ),
                 ElevatedButton(
                     onPressed: (){
-                      todoController.todos.add(Todo(text: textEditingController.text,));
+                      if (this.index==null) {
+                        todoController.todos.add(Todo(text: textEditingController.text));
+                      }else{
+                        var editing = todoController.todos[index];
+                        editing.text = textEditingController.text;
+                        todoController.todos[index] = editing;
+                      }
+
                       Get.back();
                       },
                     child:  Text((this.index==null) ? "Add" : "Edit")
