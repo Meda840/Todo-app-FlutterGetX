@@ -18,11 +18,10 @@ class HomeView extends StatelessWidget {
           child: const Icon(Icons.add),
           onPressed: () {
           Get.to(() => TodoView());
-          },
-    ),
-    body: Container(
-      child: Obx(
-          ()=>ListView.separated(
+          },),
+    body: Center(
+      child: Obx(()=>
+          ListView.separated(
               itemBuilder: (context, index)=>ListTile(
                 title: Text(todoController.todos[index].text,
                 style: (todoController.todos[index].done ?
