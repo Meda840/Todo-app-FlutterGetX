@@ -22,7 +22,13 @@ class HomeView extends StatelessWidget {
     body: Center(
       child: Obx(()=>
           ListView.separated(
-              itemBuilder: (context, index)=>ListTile(
+              itemBuilder: (context, index)=> Dismissible(key: UniqueKey(),
+               onDismissed: (_){
+                var removed = todoController.todos[index];
+                todoController.todos.removeAt(index);
+                Get.snackbar('task removed "${removed.text}"', "med has removed the task");
+               },
+                child: ListTile(
                 title: Text(todoController.todos[index].text,
                 style: (todoController.todos[index].done ?
                 const TextStyle(color: Colors.greenAccent, decoration: TextDecoration.lineThrough) :
@@ -39,6 +45,7 @@ class HomeView extends StatelessWidget {
                   },
                 ),
                 trailing: const Icon(Icons.edit,),
+              ),
               ),
               separatorBuilder: (_,__)=>const Divider(),
               itemCount: todoController.todos.length)
